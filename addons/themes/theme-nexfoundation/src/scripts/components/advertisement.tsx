@@ -5,7 +5,7 @@
 
 import React, { CSSProperties, Fragment } from "react";
 import gdn from "@library/gdn";
-export class Advertisement extends React.Component<{ mobile: boolean }> {
+export class Advertisement extends React.Component<{ mobile?: boolean }> {
     style: CSSProperties = {
         width: this.props.mobile ? "100%" : "",
     };
