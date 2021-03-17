@@ -167,7 +167,7 @@ ${DOLLAR}Configuration['Preferences']['Popup']['DiscussionComment'] = '1';
 ${DOLLAR}Configuration['Preferences']['Popup']['Mention'] = '1';
 
 // Module visibility and sorting.
-${DOLLAR}Configuration['Garden']['Modules']['ShowGuestModule'] = true;
+${DOLLAR}Configuration['Garden']['Modules']['ShowGuestModule'] = false;
 ${DOLLAR}Configuration['Garden']['Modules']['ShowSignedInModule'] = false;
 ${DOLLAR}Configuration['Garden']['Modules']['ShowRecentUserModule'] = false;
 ${DOLLAR}Configuration['Modules']['Dashboard']['Panel'] = ['MeModule', 'UserBoxModule', 'ActivityFilterModule', 'UserPhotoModule', 'ProfileFilterModule', 'SideMenuModule', 'UserInfoModule', 'GuestModule', 'Ads'];

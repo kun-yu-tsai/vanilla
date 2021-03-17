@@ -5,13 +5,19 @@
 
 import "../../scss/custom.scss";
 import React from "react";
-import { Advertisement } from "../components/advertisement";
+import { Advertisement, MobileAdvertisement } from "../components/advertisement";
 import { onContent } from "@vanilla/library/src/scripts/utility/appUtils";
 import { mountReact } from "@vanilla/react-utils";
-
+import { addHamburgerNavGroup } from "@library/flyouts/Hamburger";
+import { registerReducer } from "@library/redux/reducerRegistry";
+import { nexReducer, useNexState } from "../redux/NexReducer";
+import { CategoriesModule } from "../components/categories";
+import { TagsModule } from "../components/tags";
 interface ITagsData {
     [key: string]: any;
 }
+
+registerReducer("nex", nexReducer);
 
 onContent(() => {
     bootstrap();
@@ -23,7 +29,15 @@ function bootstrap() {
     if (adElement) {
         mountReact(<Advertisement />, adElement, undefined);
     }
+    initHamburger();
 }
+
+function initHamburger() {
+    addHamburgerNavGroup(CategoriesModule);
+    addHamburgerNavGroup(TagsModule);
+    addHamburgerNavGroup(MobileAdvertisement);
+}
+
 function articleList() {
     let ItemDiscussionLength = document.getElementsByClassName("ItemDiscussion").length + 1;
 

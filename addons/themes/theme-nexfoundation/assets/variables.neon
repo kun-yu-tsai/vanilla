@@ -122,8 +122,8 @@
         navItems: {
             default: [
                 {
-                    to: "",
-                    children: "",
+                    to: "/discussions",
+                    children: "討論",
                 }
             ],
             ## Some other languages
