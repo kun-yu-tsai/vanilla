@@ -112,7 +112,7 @@ function Stat(props: IStatProps) {
                 [classes.statLeft]: position === "left",
                 [classes.statRight]: position === "right",
             })}
-            onClick={() => window.location.href = `/profile/${type}/${name}`}
+            onClick={() => (window.location.href = `/profile/${type}/${name}`)}
         >
             <div className={classes.count}>
                 <NumberFormatted value={count || 0} />
@@ -198,8 +198,20 @@ export default function PopupUserCard(props: IProps) {
             </Container>
 
             <Container borderTop={true}>
-                <Stat count={user.countDiscussions} name={user.name} type="discussions" text={t("Discussions")} position={"left"} />
-                <Stat count={user.countComments} name={user.name} type="comments" text={t("Comments")} position={"right"} />
+                <Stat
+                    count={user.countDiscussions}
+                    name={user.name}
+                    type="discussions"
+                    text={t("Discussions")}
+                    position={"left"}
+                />
+                <Stat
+                    count={user.countComments}
+                    name={user.name}
+                    type="comments"
+                    text={t("Comments")}
+                    position={"right"}
+                />
             </Container>
 
             <Container borderTop={true}>
