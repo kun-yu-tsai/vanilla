@@ -238,6 +238,22 @@ if (!function_exists('WriteDiscussion')) :
                 <div class="Meta Meta-Discussion">
                     <?php
                     writeTags($discussion);
+
+                    if ($sender->data('_ShowCategoryLink', true) && $category && c('Vanilla.Categories.Use') &&
+                        CategoryModel::checkPermission($category, 'Vanilla.Discussions.View')) {
+                        // Kun: Skip accessibleAttribute because we now allow access for all cateogories.
+                        // $accessibleAttributes = ["tabindex" => "0", "aria-label" => HtmlUtils::accessibleLabel($template, $accessibleVars)];
+                        // if ($layout === "mixed") { // The links to categories are duplicates and have no accessible value
+                        //     $accessibleAttributes['tabindex'] = "-1";
+                        //     $accessibleAttributes['aria-hidden'] = "true";
+                        // }
+                        echo wrap(
+                            anchor(htmlspecialchars($discussion->Category),
+                        categoryUrl($discussion->CategoryUrlCode)/*, $accessibleAttributes */),
+                            'span',
+                            ['class' => 'MItem Category '.$category['CssClass']]
+                        );
+                    }
                     ?>
                     <span class="MItem MCount ViewCount">
                     <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -297,21 +313,6 @@ if (!function_exists('WriteDiscussion')) :
                         $template = t('User "%s" started discussion "%s" on date %s');
                         $userName = $first->Name;
                         $accessibleVars = [$userName, $discussionName, $dateTimeFormatter->formatDate($discussion->FirstDate, false)];
-                    }
-
-                    if ($sender->data('_ShowCategoryLink', true) && $category && c('Vanilla.Categories.Use') &&
-                        CategoryModel::checkPermission($category, 'Vanilla.Discussions.View')) {
-                        $accessibleAttributes = ["tabindex" => "0", "aria-label" => HtmlUtils::accessibleLabel($template, $accessibleVars)];
-                        if ($layout === "mixed") { // The links to categories are duplicates and have no accessible value
-                            $accessibleAttributes['tabindex'] = "-1";
-                            $accessibleAttributes['aria-hidden'] = "true";
-                        }
-                        echo wrap(
-                            anchor(htmlspecialchars($discussion->Category),
-                                categoryUrl($discussion->CategoryUrlCode), $accessibleAttributes),
-                            'span',
-                            ['class' => 'MItem Category '.$category['CssClass']]
-                        );
                     }
                     $sender->fireEvent('DiscussionMeta');
                     ?>
