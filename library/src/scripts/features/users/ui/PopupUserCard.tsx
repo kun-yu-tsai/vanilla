@@ -58,6 +58,8 @@ interface ILabelProps {
 
 interface IStatProps {
     count?: number;
+    name: string;
+    type: string;
     text: string;
     position: "left" | "right";
 }
@@ -103,13 +105,14 @@ function ButtonContainer(props) {
 function Stat(props: IStatProps) {
     const classes = userCardClasses();
 
-    const { count, text, position } = props;
+    const { count, name, type, text, position } = props;
     return (
         <div
             className={classNames(classes.stat, {
                 [classes.statLeft]: position === "left",
                 [classes.statRight]: position === "right",
             })}
+            onClick={() => window.location.href = `/profile/${type}/${name}`}
         >
             <div className={classes.count}>
                 <NumberFormatted value={count || 0} />
@@ -194,36 +197,13 @@ export default function PopupUserCard(props: IProps) {
                 </Permission>
             </Container>
 
-            <div className={classNames(classes.container, classes.actionContainer)}>
-                <ButtonContainer>
-                    <LinkAsButton
-                        to={makeProfileUrl(user.name)}
-                        baseClass={ButtonTypes.STANDARD}
-                        className={classes.button}
-                    >
-                        {t("View Profile")}
-                    </LinkAsButton>
-                </ButtonContainer>
-
-                <ButtonContainer>
-                    <LinkAsButton
-                        to={`/messages/add/${user.name}`}
-                        baseClass={ButtonTypes.STANDARD}
-                        className={classes.button}
-                    >
-                        {t("Message")}
-                    </LinkAsButton>
-                </ButtonContainer>
-            </div>
-
             <Container borderTop={true}>
-                <Stat count={user.countDiscussions} text={t("Discussions")} position={"left"} />
-                <Stat count={user.countComments} text={t("Comments")} position={"right"} />
+                <Stat count={user.countDiscussions} name={user.name} type="discussions" text={t("Discussions")} position={"left"} />
+                <Stat count={user.countComments} name={user.name} type="comments" text={t("Comments")} position={"right"} />
             </Container>
 
             <Container borderTop={true}>
                 <Date text={t("Joined")} date={user.dateJoined} />
-                <Date text={t("Last Active")} date={user.dateLastActive} />
             </Container>
         </DropDown>
     );
