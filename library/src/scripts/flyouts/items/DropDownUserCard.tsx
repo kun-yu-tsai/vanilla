@@ -27,7 +27,17 @@ export class DropDownUserCard extends React.Component<IProps> {
         const classesUserDropDown = userDropDownClasses();
         return (
             <li className={classNames(classesUserDropDown.userCard, "dropDown-userCard", this.props.className)}>
-                <SmartLink
+                <UserPhoto
+                    className={classNames("userDropDown-userCardPhoto", classesUserDropDown.userCardPhoto)}
+                    userInfo={currentUser}
+                    size={this.props.photoSize || UserPhotoSize.LARGE}
+                />
+                <p className={classNames("userDropDown-userCardName", classesUserDropDown.userCardName)}>
+                    {currentUser.name}
+                </p>
+
+                {/* issue #38 */}
+                {/* <SmartLink
                     to={profileLink}
                     className={classNames("userDropDown-userCardPhotoLink", classesUserDropDown.userCardPhotoLink)}
                 >
@@ -42,7 +52,7 @@ export class DropDownUserCard extends React.Component<IProps> {
                     className={classNames("userDropDown-userCardName", classesUserDropDown.userCardName)}
                 >
                     {currentUser.name}
-                </SmartLink>
+                </SmartLink> */}
             </li>
         );
     }
