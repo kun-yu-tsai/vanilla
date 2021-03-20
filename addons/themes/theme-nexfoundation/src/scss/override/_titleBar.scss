@@ -1,0 +1,7 @@
+@import "../mixins/mixins";
+
+.headerNavigation {
+  a[to="/discussions"] {
+    display: none;
+  }
+}

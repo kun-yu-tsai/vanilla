@@ -1,3 +1,5 @@
+@import "../mixins/mixins";
+
 //title
 .articleTitle {
     color: black ;
@@ -38,8 +40,9 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 17px;
-    margin-left: 300px;
-
+    @include lg {
+        margin-left: 300px;
+    }
 }
 
 .articleTime > a {
@@ -47,6 +50,8 @@
 }
 
 .DiscussionHeader .AuthorWrap{
-    margin-left: 450px;
+    @include lg {
+      margin-left: 450px;
+    }
 }
 
