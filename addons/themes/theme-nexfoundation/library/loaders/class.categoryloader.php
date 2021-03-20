@@ -5,7 +5,10 @@ use Vanilla\Web\JsInterpop\ReduxAction;
 
 class CategoryLoader implements TemplateLoader {
 
-    public function load(Gdn_Controller $sender) {
+    /**
+     * @param PageControllerWithRedux $sender
+     */
+    public function load($sender) {
         $model = CategoryModel::instance();
         $names = array_values(
             array_map(function ($category) {

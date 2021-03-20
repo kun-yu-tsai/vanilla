@@ -4,22 +4,36 @@
  */
 
 import React, { CSSProperties, Fragment } from "react";
-import gdn from "@library/gdn";
-export class Advertisement extends React.Component<{ mobile?: boolean }> {
+import { INexStoreState } from "../redux/NexReducer";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state: INexStoreState) => {
+    const meta = state.nex.meta.data;
+    return {
+        currentThemePath: meta?.currentThemePath,
+    };
+};
+
+interface IAdvertisementProps {
+    mobile?: boolean;
+}
+
+type IProps = IAdvertisementProps & ReturnType<typeof mapStateToProps>;
+
+export class BaseAdvertisement extends React.Component<IProps> {
     style: CSSProperties = {
-        width: this.props.mobile ? "100%" : "",
+        width: this.props.mobile ? "85%" : "",
     };
     open = () => {
         window.open("https://www.nexf.org/");
     };
-
     render() {
         return (
             <Fragment>
                 <img
                     style={this.style}
                     className="banner"
-                    src={`${gdn.meta.currentThemePath}/assets/ad.svg`}
+                    src={`${this.props.currentThemePath}/assets/ad.svg`}
                     alt="nex foundation"
                     onClick={() => this.open()}
                 />
@@ -27,6 +41,8 @@ export class Advertisement extends React.Component<{ mobile?: boolean }> {
         );
     }
 }
+const withRedux = connect(mapStateToProps);
+export const Advertisement = withRedux(BaseAdvertisement);
 
 export class MobileAdvertisement extends React.Component {
     style: CSSProperties = {

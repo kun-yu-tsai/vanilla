@@ -61,7 +61,7 @@ $banner-width: 250px;
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  
+
   img.banner {
     min-width: $banner-width;
   }
@@ -152,10 +152,4 @@ $banner-width: 250px;
     padding-left: 5px;
     border: none;
   }
-  // a:before {
-  //   content: "#";
-  // }
-  // a:after {
-  //   content: "|";
-  // }
 }

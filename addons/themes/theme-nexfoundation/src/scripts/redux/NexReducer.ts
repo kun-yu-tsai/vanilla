@@ -13,9 +13,14 @@ export interface INexCategory {
     names: string[];
 }
 
+export interface INexMeta {
+    currentThemePath: string;
+}
+
 export interface INexState {
     tags: ILoadable<string[]>;
     categories: ILoadable<string[]>;
+    meta: ILoadable<INexMeta>;
 }
 export interface INexStoreState extends ICoreStoreState {
     nex: INexState;
@@ -24,6 +29,7 @@ export interface INexStoreState extends ICoreStoreState {
 export const INITIAL_NEX_STATE: INexState = {
     tags: { status: LoadStatus.PENDING },
     categories: { status: LoadStatus.PENDING },
+    meta: { status: LoadStatus.PENDING },
 };
 
 export const nexReducer = produce(
@@ -36,6 +42,11 @@ export const nexReducer = produce(
         .case(NexActions.getCategory.done, (state, payload) => {
             state.categories.status = LoadStatus.SUCCESS;
             state.categories.data = payload.result.names;
+            return state;
+        })
+        .case(NexActions.getMeta.done, (state, payload) => {
+            state.meta.status = LoadStatus.SUCCESS;
+            state.meta.data = payload.result;
             return state;
         }),
 );

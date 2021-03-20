@@ -7,9 +7,9 @@ class TagLoader implements TemplateLoader {
 
     /**
      *
-     * @param Gdn_Controller
+     * @param PageControllerWithRedux
      */
-    public function load(Gdn_Controller $sender) {
+    public function load($sender) {
         $container = Gdn::getContainer();
         $tagModule = $container->get(TagModule::class);
         $tags = array_map(function ($tag) {
