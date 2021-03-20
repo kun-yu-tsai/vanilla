@@ -197,6 +197,7 @@ export const userCardClasses = useThemeCache((props: { compact?: boolean } = {})
 
     const stat = style("stat", {
         display: "flex",
+        cursor: "pointer",
         flexDirection: "column",
         alignItems: "center",
         flexGrow: 1,
