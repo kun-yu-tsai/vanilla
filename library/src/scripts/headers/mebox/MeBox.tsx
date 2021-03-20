@@ -33,7 +33,7 @@ export default class MeBox extends React.Component<IMeBoxProps> {
         return (
             <div className={classNames("meBox", this.props.className, classes.root)}>
                 <NotificationsDropDown userSlug={userInfo.name} countUnread={userInfo.countUnreadNotifications} />
-                <MessagesDropDown />
+                {/* <MessagesDropDown /> */}
                 <UserDropdown />
             </div>
         );
