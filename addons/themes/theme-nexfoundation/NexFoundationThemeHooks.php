@@ -1,13 +1,7 @@
 <?php
 require_once("settings/bootstrap.php");
 
-use Garden\Web\Data;
-use Vanilla\Web\JsInterpop\ReduxActionPreloadTrait;
-use Vanilla\Web\JsInterpop\ReduxAction;
-
 class NexFoundationThemeHooks extends Gdn_Plugin {
-
-    use ReduxActionPreloadTrait;
 
     /**
      *
@@ -17,17 +11,30 @@ class NexFoundationThemeHooks extends Gdn_Plugin {
         // Fetch the currently enabled locale (en by default)
         $adModule = new AdModule();
         $sender->addModule($adModule);
-        $this->run_loaders();
+        $this->run_loaders($sender);
     }
 
-    public function run_loaders() {
+    /**
+     * @param PageControllerWithRedux $sender
+     */
+    public function run_loaders($sender) {
         $container = Gdn::getContainer();
-        $loaders = [TagLoader::class, CategoryLoader::class];
+        $loaders = [TagLoader::class, CategoryLoader::class, MetaLoader::class];
         foreach ($loaders as $loader) {
-            $container->get($loader);
+            $loaderInstance = $container->get($loader);
+            $loaderInstance->load($sender);
         }
     }
 
-    public function base_Register_handler($sender) {}
+    /**
+     * This is the handler to catch event fire from:
+     *
+     *  library/Vanilla/Controllers/SearchRootController.php
+     *
+     * @param Vanilla\Web\Page $sender
+     */
+    public function beforeSearchRootRender_handler($sender) {
+        $this->run_loaders($sender);
+    }
 }
 ?>

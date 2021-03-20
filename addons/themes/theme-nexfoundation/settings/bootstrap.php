@@ -31,5 +31,5 @@ $container = \Gdn::getContainer();
 $container
     ->rule(TemplateLoader::class)
     ->setClass(TemplateLoader::class)
-    ->addCall('load', [Gdn_Controller::class]);
+;
 ?>

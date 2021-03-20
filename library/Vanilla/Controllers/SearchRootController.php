@@ -20,8 +20,10 @@ class SearchRootController extends PageDispatchController {
      * Serve the root search page.
      */
     public function index() {
-        return $this
-            ->useSimplePage(t('Search'))
+        $eventManager = \Gdn::getContainer()->get(\Garden\EventManager::class);
+        $page = $this->useSimplePage(t('Search'));
+        $eventManager->fire('beforeSearchRootRender', $page);
+        return $page
             ->blockRobots()
             ->render()
         ;
