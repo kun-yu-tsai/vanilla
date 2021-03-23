@@ -4,6 +4,7 @@
 !/addons/themes/theme-boilerplate/
 !/addons/themes/keystone/
 !/addons/themes/theme-nexfoundation/
+!/addons/addons/LikedPost
 /applications/*
 !/applications/conversations/
 !/applications/dashboard/
