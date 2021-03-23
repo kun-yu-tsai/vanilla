@@ -1,0 +1,27 @@
+{
+    "name": "NEX Foundation - Liked Post",
+    "description": "Enable Like Button on both Discussion and Comment",
+    "version": "0.0.1",
+    "requiredTheme": false,
+    "mobileFriendly": true,
+    "settingsUrl": "",
+    "settingsPermission": "Garden.Settings.Manage",
+    "hasLocale": true,
+    "registerPermissions": false,
+    "socialConnect": false,
+    "icon": "like_post.png",
+    "key": "likedpost",
+    "type": "addon",
+    "documentationUrl": "",
+    "oldType": "plugin",
+    "authors": [
+        {
+            "name": "Benno Lin",
+            "email": "benno.lin@nexf.org",
+            "homepage": "https://bennolin.com"
+        }
+    ],
+    "require": {
+        "vanilla": ">=2.2"
+    }
+}
