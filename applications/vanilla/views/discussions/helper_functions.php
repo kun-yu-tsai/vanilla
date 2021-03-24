@@ -179,7 +179,7 @@ if (!function_exists('WriteDiscussion')) :
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
 
 
-        if ($session->UserID) {
+        if ($session->UserID && $sender->data('ShowLastComment', true)) {
             $discussionUrl .= '#latest';
         }
         $sender->EventArguments['DiscussionUrl'] = &$discussionUrl;
@@ -290,7 +290,7 @@ if (!function_exists('WriteDiscussion')) :
 
                     $discussionName = is_array($discussion) ? $discussion['Name'] : $discussion->Name;
 
-                    if ($discussion->LastCommentID != '') {
+                    if ($discussion->LastCommentID != '' && $sender->data('ShowLastComment', true)) {
                         echo ' <span class="MItem LastCommentBy">'.sprintf(t('Most recent by %1$s'), userAnchor($last)).'</span> ';
                         echo ' <span class="MItem LastCommentDate">'.Gdn_Format::date($discussion->LastDate, "html").'</span>';
                         $userName = $last->Name;
