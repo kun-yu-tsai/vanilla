@@ -36,5 +36,18 @@ class NexFoundationThemeHooks extends Gdn_Plugin {
     public function beforeSearchRootRender_handler($sender) {
         $this->run_loaders($sender);
     }
+
+    /**
+     * @param DiscussionsController $sender
+     */
+    public function discussionscontroller_BeforeBuildPager_handler($sender) {
+        $sender->setData('ShowLastComment', false);
+    }
+
+    public function setup() {
+        $this->structure();
+    }
+
+    public function structure() {}
 }
 ?>
