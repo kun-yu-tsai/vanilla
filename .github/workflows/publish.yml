@@ -65,3 +65,6 @@ jobs:
               --name vanilla-forum \
               --multicontainer-config-type compose \
               --multicontainer-config-file docker-compose.yml
+            az webapp restart \
+              --resource-group ${{ secrets.RESOURCE_GROUP }} \
+              --name vanilla-forum
