@@ -42,6 +42,20 @@ class NexFoundationThemeHooks extends Gdn_Plugin {
      */
     public function discussionscontroller_BeforeBuildPager_handler($sender) {
         $sender->setData('ShowLastComment', false);
+
+        // tagged page needs to show panel #77
+        if ($sender->RequestMethod == "tagged") {
+            $sender->addModule('CategoriesModule');
+            $sender->addModule('PopularTagsModule');
+        }
+    }
+
+    public function categoriescontroller_BeforeBuildPager_handler($sender) {
+        $sender->setData('ShowLastComment', false);
+    }
+
+    public function discussioncontroller_BeforeDiscussionRender_handler($sender) {
+        $sender->addModule('PopularTagsModule');
     }
 
     public function setup() {
