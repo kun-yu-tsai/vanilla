@@ -1,3 +1,5 @@
+@import "../mixins/mixins";
+
 .InlineTags ul,
 .InlineTags li {
     display: inline;
@@ -53,4 +55,15 @@
     color: #000000;
     text-align: center;
     margin-left: 75px;
+}
+
+.Box.Tags {
+    display: none;
+    @include lg {
+        display: block;
+    }
+}
+
+#modals  .Box.Tags {
+    display: block;
 }
