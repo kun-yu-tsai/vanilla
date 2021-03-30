@@ -39,6 +39,11 @@
 
 .TagCloud li:after {
     content: '|';
+    margin-left: 1px;
+}
+
+.TagCloud li:last-child:after {
+    content: '';
 }
 
 .TagCloud .TagCloud-Item {

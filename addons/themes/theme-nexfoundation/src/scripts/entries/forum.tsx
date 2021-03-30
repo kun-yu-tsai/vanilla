@@ -13,15 +13,16 @@ import { registerReducer } from "@library/redux/reducerRegistry";
 import { nexReducer, useNexState } from "../redux/NexReducer";
 import { CategoriesModule } from "../components/categories";
 import { TagsModule } from "../components/tags";
-interface ITagsData {
-    [key: string]: any;
+interface ITag {
+    name: string;
+    url: string;
 }
 
 registerReducer("nex", nexReducer);
 
 onContent(() => {
     bootstrap();
-    articleList();
+    mountArticleTags();
 });
 
 function bootstrap() {
@@ -29,9 +30,9 @@ function bootstrap() {
     if (adElement) {
         mountReact(<Advertisement />, adElement, undefined);
     }
-    const categoryDivs = document.querySelectorAll(".hot-forum-root_topic");
-    for (const categoryDiv of categoryDivs) {
-        categoryDiv?.addEventListener("click", clickAnchorInside);
+    const categoryNodes = document.querySelectorAll(".hot-forum-root_topic");
+    for (const categoryNode of categoryNodes) {
+        categoryNode?.addEventListener("click", clickAnchorInside);
     }
 
     const anchorsInside = document.querySelectorAll(".hot-forum-root_topic .ItemLink");
@@ -54,30 +55,31 @@ function clickAnchorInside(this: any) {
     anchor.click();
 }
 
-function articleList() {
-    let ItemDiscussionLength = document.getElementsByClassName("ItemDiscussion").length + 1;
-
-    for (let i = 1; i < ItemDiscussionLength; i++) {
-        let element = document.getElementById(`Discussion_${i}`);
-
-        let json: ITagsData = {};
-        json.data = JSON.parse(element!.dataset.meta!).tags;
-        json.id = i;
-
-        let menuItems: any[] = [];
-        for (let g = 0; g < json.data.length; g++) {
-            menuItems.push(<div className="tag">{`#${json.data[g].name}`}</div>);
+function mountArticleTags() {
+    const discussions = document.querySelector("ul.DataList.Discussions");
+    if (!discussions) {
+        return;
+    }
+    for (const discussion of discussions.getElementsByTagName("li")) {
+        const meta = JSON.parse(discussion.dataset.meta!);
+        const tags: ITag[] = meta.tags ? meta.tags : [];
+        const tagNode = discussion.querySelector(`#${discussion.id.replace("Discussion", "tag")}`);
+        if (tagNode === null) {
+            continue;
         }
-
-        let adElement = document.getElementById(`tag_${i}`);
-        if (adElement) {
-            mountReact(
-                <div>
-                    <div className="tagBlock">{menuItems}</div>
-                </div>,
-                adElement,
-                undefined,
-            );
-        }
+        mountReact(
+            <ul className="TagCloud">
+                {tags.map((tag, idx) => {
+                    return (
+                        <li className="TagCloud-Item" key={`tag_${idx}`}>
+                            <a href={tag.url} className={`tag Tag_${tag.name}`}>
+                                {tag.name}
+                            </a>
+                        </li>
+                    );
+                })}
+            </ul>,
+            tagNode as HTMLElement,
+        );
     }
 }
