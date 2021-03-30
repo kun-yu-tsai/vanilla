@@ -60,8 +60,8 @@ function mountArticleTags() {
     if (!discussions) {
         return;
     }
-    for (const discussion of discussions.getElementsByTagName("li")) {
-        const meta = JSON.parse(discussion.dataset.meta!);
+    for (const discussion of discussions.querySelectorAll("li.ItemDiscussion")) {
+        const meta = JSON.parse((discussion as HTMLElement).dataset.meta!);
         const tags: ITag[] = meta.tags ? meta.tags : [];
         const tagNode = discussion.querySelector(`#${discussion.id.replace("Discussion", "tag")}`);
         if (tagNode === null) {
