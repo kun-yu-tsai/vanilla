@@ -1,4 +1,7 @@
-$signin-form-width: 400px;
+@import "./mixins";
+
+$signin-form-width: 300px;
+$signin-form-width-lg: 400px;
 $signin-item-margin: 20px;
 
 .NEXTheme.FormWrapper {
@@ -9,6 +12,10 @@ $signin-item-margin: 20px;
   form {
     min-width: $signin-form-width;
     max-width: $signin-form-width;
+    @include lg {
+      min-width: $signin-form-width-lg;
+      max-width: $signin-form-width-lg;
+    }
   }
 
   .Methods {
@@ -28,10 +35,13 @@ $signin-item-margin: 20px;
   }
 
   .MainForm {
-    width: 100%;
+    width: 95%;
 
     input {
       max-width: $signin-form-width;
+      @include lg {
+        max-width: $signin-form-width-lg;
+      }
       border-radius: 50px !important;
     }
 

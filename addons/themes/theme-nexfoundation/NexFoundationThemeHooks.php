@@ -58,6 +58,15 @@ class NexFoundationThemeHooks extends Gdn_Plugin {
         $sender->addModule('PopularTagsModule');
     }
 
+    public function categoriescontroller_BeforeNewDiscussionButton_handler($sender) {
+        $panel = $sender->getAsset('Panel');
+        foreach ($panel->Items as $item) {
+            if (is_a($item, NewDiscussionModule::class)) {
+                $item->CategoryID = null;
+            }
+        }
+    }
+
     public function setup() {
         $this->structure();
     }

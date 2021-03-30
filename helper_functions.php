@@ -220,14 +220,6 @@ if (!function_exists('WriteDiscussion')) :
    </span>
 
             <div class="ItemContent Discussion">
-                <div class="tag"  aria-level="3" id="tag_<?php echo $discussion->DiscussionID; ?>">
-                <?php
-                // echo ($discussion->DataAttribute);
-                // echo ($discussion->Bookmarked);
-
-
-                ?>
-                </div>
                 <div class="Title" role="heading" aria-level="3">
                     <?php
                     echo adminCheck($discussion, ['', ' ']).anchor($discussionName, $discussionUrl);
