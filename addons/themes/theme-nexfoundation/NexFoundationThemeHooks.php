@@ -62,7 +62,7 @@ class NexFoundationThemeHooks extends Gdn_Plugin {
     /**
      * @link https://github.com/nexfoundation/vanilla/issues/68
      *
-     * We forcibly set category to null for the sake of making all new post category-agnostic.
+     * We forcibly set category to null in order to make all new post category-agnostic.
      */
     public function categoriescontroller_BeforeNewDiscussionButton_handler($sender) {
         $panel = $sender->getAsset('Panel');
