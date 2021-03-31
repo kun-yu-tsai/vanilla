@@ -10,6 +10,10 @@ onContent(() => {
 
 function bootstrap() {
     for (const el of document.getElementsByName("likeButton")) {
+        if (el.getAttribute("mounted")) {
+            continue;
+        }
+        el.setAttribute("mounted", true);
         const meta = JSON.parse(el.dataset.meta || "");
         mountReact(
             <LikeButton record_type={meta.type} record_id={meta.id} liked={meta.liked} count={meta.count} />,

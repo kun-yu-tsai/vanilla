@@ -138,9 +138,9 @@ $this->fireEvent('AfterDiscussionMeta'); // DEPRECATED
                 }
 
                 // Include IP Address if we have permission
-                if ($Session->checkPermission('Garden.PersonalInfo.View')) {
-                    echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
-                }
+                // if ($Session->checkPermission('Garden.PersonalInfo.View')) {
+                //     echo wrap(ipAnchor($Discussion->InsertIPAddress), 'span', ['class' => 'MItem IPAddress']);
+                // }
 
                 $this->fireEvent('DiscussionInfo');
                 $this->fireEvent('AfterDiscussionMeta'); // DEPRECATED

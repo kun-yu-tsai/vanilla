@@ -37,6 +37,12 @@
     color: red;
 }
 
+ul.TagCloud li.TagCloud-Item {
+    a{
+        color: red;
+    }
+}
+
 .TagCloud li:after {
     content: '|';
     margin-left: 1px;

@@ -1,15 +1,14 @@
 <?php if (!defined('APPLICATION')) exit();
 $Session = Gdn::session();
-if (!function_exists('WriteComment'))
-    include $this->fetchViewLocation('helper_functions', 'discussion');
+include $this->fetchViewLocation('override_functions', 'discussion');
+include $this->fetchViewLocation('helper_functions', 'discussion');
 
+if (!defined('APPLICATION')) {
+    exit();
+}
 
-    if (!defined('APPLICATION')) {
-        exit();
-    }
-
-    $Discussion = $this->data('Discussion');
-    $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
+$Discussion = $this->data('Discussion');
+$Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
 
 
 // Wrap the discussion related content in a div.
@@ -24,14 +23,12 @@ echo '<!-- Page Title -->
 
 
 echo ' <div class="tagBorder">';
-//tag新位置
-$tagModule = new TagModule($sender);
-echo $tagModule->inlineDisplay();
-//
+$tagsHelper = Gdn::getContainer()->get(TagsHelper::class);
+$tagsHelper->writeMetaTags();
 
 //發表時間新位置
 echo ' <div class="articleTime">';
-echo anchor(Gdn_Format::date($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
+echo anchor(Gdn_Format::toDate($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
 echo '</div>';
 echo '</div>';
 
@@ -53,14 +50,12 @@ $this->fireEvent('AfterDiscussionTitle');
 
 
 // Write the initial discussion.
-if ($this->data('Page') == 1) {
-    include $this->fetchViewLocation('discussion', 'discussion');
-    echo '</div>'; // close discussion wrap
 
-    $this->fireEvent('AfterDiscussion');
-} else {
-    echo '</div>'; // close discussion wrap
-}
+include $this->fetchViewLocation('discussion', 'discussion');
+echo '</div>'; // close discussion wrap
+
+$this->fireEvent('AfterDiscussion');
+
 
 echo '<div class="CommentsWrap">';
 
@@ -72,8 +67,8 @@ echo $this->Pager->toString('less');
 echo '</span>';
 
 echo '<div class="DataBox DataBox-Comments">';
-if ($this->data('Comments')->numRows() > 0)
-    echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Comments')).'</h2>';
+// if ($this->data('Comments')->numRows() > 0)
+//     echo '<h2 class="CommentHeading">'.$this->data('_CommentsHeader', t('Comments')).'</h2>';
 ?>
     <ul class="MessageList DataList Comments">
         <?php include $this->fetchViewLocation('comments'); ?>

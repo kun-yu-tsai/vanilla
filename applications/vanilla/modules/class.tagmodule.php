@@ -165,6 +165,13 @@ class TagModule extends Gdn_Module {
         return 'Panel';
     }
 
+    public function getTags() {
+        if (!$this->_TagData) {
+            $this->getData();
+        }
+        return $this->_TagData->resultArray();
+    }
+
     /**
      *
      *
@@ -187,7 +194,7 @@ class TagModule extends Gdn_Module {
         ob_start();
         ?>
         <div class="InlineTags Meta">
-            <!-- echo t('Tagged'); echo("");  -->
+            <?php echo t('Tagged'); echo(""); ?>
             <ul>
                 <?php foreach ($this->_TagData->resultArray() as $tag) :
 ?>

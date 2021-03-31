@@ -12,6 +12,8 @@
 
 .tagBorder{
     display: flex ;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .articaleTags {
@@ -40,9 +42,6 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 17px;
-    @include lg {
-        margin-left: 300px;
-    }
 }
 
 .articleTime > a {
@@ -55,3 +54,68 @@
     }
 }
 
+.MessageList.Discussion {
+    background: white;
+    border-radius: 15px;
+    padding: 15px 45px 15px 45px;
+}
+
+.Comment .Item-BodyWrap .Item-Header.CommentHeader {
+    padding: 0px;
+    padding-top: 0px;
+}
+
+.Comment {
+    @include md {
+        width: 100%;
+        display: flex;
+        align-items: start;
+    }
+}
+
+.Comment .Item-Floor {
+    padding-top: 12px;
+    margin-right: 5px;
+    min-width: 60px;
+    color: #FF3559;
+}
+
+.Comment .Item-BodyWrap {
+    width: 100%;
+    .Message.userContent {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background: #EEEEEE;
+        min-height: 42px;
+        border-radius: 15px;
+        padding: 15px 25px 10px 25px;
+    }
+    .Options {
+        position: inherit !important;
+        margin-top: 0px !important;
+    }
+
+    @include md {
+        .Item-Footer {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+        .Item-Footer .Item-Header.CommentHeader {
+            display: flex;
+            justify-content: flex-end;
+            align-items: start;
+            padding: 0px;
+            .Meta.CommentMeta.CommentInfo {
+                width: initial;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding: 0px;
+            }
+        }
+    }
+}

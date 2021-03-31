@@ -11,7 +11,6 @@ class TagLoader implements TemplateLoader {
      */
     public function load($sender) {
         $container = Gdn::getContainer();
-        $tagModule = $container->get(TagModule::class);
         $tags = array_map(function ($tag) {
             return $tag['Name'];
         }, $this->_getData());
