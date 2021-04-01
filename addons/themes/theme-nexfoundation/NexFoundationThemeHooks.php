@@ -73,6 +73,14 @@ class NexFoundationThemeHooks extends Gdn_Plugin {
         }
     }
 
+    /**
+     * event from PostController before request newly created comment
+     *
+     */
+    public function base_BeforeCommentRender_handler($sender) {
+        require_once $sender->fetchViewLocation('override_functions', 'Discussion');
+    }
+
     public function setup() {
         $this->structure();
     }
