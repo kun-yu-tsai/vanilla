@@ -39,13 +39,7 @@ if ($this->Data !== FALSE) {
                 }
 
                 echo '<div class="hot-forum-root_topic">';
-
-                if ($Category->CountAllDiscussions > 0) {
-                    $CountText = '<span class="Aside"><span class="Count">'.bigPlural($Category->CountAllDiscussions, '%s discussion').'</span></span>';
-                } else {
-                    $CountText = '';
-                }
-
+                $CountText = '';
                 if ($Category->DisplayAs === 'Heading') {
                     echo $CountText.' '.htmlspecialchars($Category->Name);
                 } else {
