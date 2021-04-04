@@ -6,13 +6,16 @@
 import "../../scss/custom.scss";
 import React from "react";
 import { Advertisement, MobileAdvertisement } from "../components/advertisement";
-import { onContent } from "@vanilla/library/src/scripts/utility/appUtils";
+import { onContent, onReady } from "@vanilla/library/src/scripts/utility/appUtils";
 import { mountReact } from "@vanilla/react-utils";
 import { addHamburgerNavGroup } from "@library/flyouts/Hamburger";
 import { registerReducer } from "@library/redux/reducerRegistry";
 import { nexReducer, useNexState } from "../redux/NexReducer";
 import { CategoriesModule } from "../components/categories";
 import { TagsModule } from "../components/tags";
+import { IUserFragment } from "@library/@types/api/users";
+import { UserPhoto, UserPhotoSize } from "@library/headers/mebox/pieces/UserPhoto";
+import { Bookmark, IBookmark } from "../components/bookmark";
 interface ITag {
     name: string;
     url: string;
@@ -20,9 +23,14 @@ interface ITag {
 
 registerReducer("nex", nexReducer);
 
-onContent(() => {
+onReady(() => {
     bootstrap();
+});
+
+onContent(() => {
     mountArticleTags();
+    mountArticleUser();
+    mountArticleBookmark();
 });
 
 function bootstrap() {
@@ -64,9 +72,10 @@ function mountArticleTags() {
         const meta = JSON.parse((discussion as HTMLElement).dataset.meta!);
         const tags: ITag[] = meta.tags ? meta.tags : [];
         const tagNode = discussion.querySelector(`#${discussion.id.replace("Discussion", "tag")}`);
-        if (tagNode === null || tags.length <= 0) {
+        if (tagNode === null || tags.length <= 0 || tagNode.getAttribute("mounted")) {
             continue;
         }
+        tagNode.setAttribute("mounted", true);
         mountReact(
             <ul className="TagCloud">
                 {tags.map((tag, idx) => {
@@ -80,6 +89,49 @@ function mountArticleTags() {
                 })}
             </ul>,
             tagNode as HTMLElement,
+        );
+    }
+}
+
+function mountArticleUser() {
+    const userAnchors = document.querySelectorAll("span.MItem.LastCommentBy");
+    if (!userAnchors) {
+        return;
+    }
+    for (const userAnchor of userAnchors) {
+        const userMeta = (userAnchor as HTMLElement).dataset.user;
+        const userURL = (userAnchor as HTMLElement).dataset.url || "";
+        if (userMeta === null || userMeta === undefined || userAnchor.getAttribute("mounted")) {
+            continue;
+        }
+        userAnchor.setAttribute("mounted", true);
+        const user: IUserFragment = JSON.parse(userMeta);
+        mountReact(
+            <div className="UserAnchor">
+                <UserPhoto userInfo={user} size={UserPhotoSize.SMALL}></UserPhoto>
+                <a href={userURL}>{user.name}</a>
+            </div>,
+            userAnchor as HTMLElement,
+        );
+    }
+}
+
+function mountArticleBookmark() {
+    const bookmarkAnchors = document.querySelectorAll("span.MItem.MCount.ViewCount");
+    for (const bookmarkAnchor of bookmarkAnchors) {
+        const discussionMeta = (bookmarkAnchor as HTMLElement).dataset.discussion;
+        if (discussionMeta === null || discussionMeta === undefined || bookmarkAnchor.getAttribute("mounted")) {
+            continue;
+        }
+        const discussion: IBookmark = JSON.parse(discussionMeta);
+        bookmarkAnchor.setAttribute("mounted", true);
+        mountReact(
+            <Bookmark
+                bookmarked={discussion.bookmarked}
+                discussionID={discussion.discussionID}
+                countBookmarks={discussion.countBookmarks}
+            />,
+            bookmarkAnchor as HTMLElement,
         );
     }
 }
