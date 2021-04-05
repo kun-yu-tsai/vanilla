@@ -37,7 +37,6 @@ echo '</div>';
 echo '<div class="Options">';
 
 $this->fireEvent('BeforeDiscussionOptions');
-writeBookmarkLink();
 echo getDiscussionOptionsDropdown();
 writeAdminCheck();
 

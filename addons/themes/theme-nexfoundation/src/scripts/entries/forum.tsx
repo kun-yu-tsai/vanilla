@@ -16,6 +16,8 @@ import { TagsModule } from "../components/tags";
 import { IUserFragment } from "@library/@types/api/users";
 import { UserPhoto, UserPhotoSize } from "@library/headers/mebox/pieces/UserPhoto";
 import { Bookmark, IBookmark } from "../components/bookmark";
+import gdn from "@library/gdn";
+
 interface ITag {
     name: string;
     url: string;
@@ -94,7 +96,7 @@ function mountArticleTags() {
 }
 
 function mountArticleUser() {
-    const userAnchors = document.querySelectorAll("span.MItem.LastCommentBy");
+    const userAnchors = document.querySelectorAll("span.MItem.Author");
     if (!userAnchors) {
         return;
     }
@@ -106,9 +108,10 @@ function mountArticleUser() {
         }
         userAnchor.setAttribute("mounted", true);
         const user: IUserFragment = JSON.parse(userMeta);
+        const size = gdn.meta.DiscussionID ? UserPhotoSize.MEDIUM : UserPhotoSize.SMALL;
         mountReact(
             <div className="UserAnchor">
-                <UserPhoto userInfo={user} size={UserPhotoSize.SMALL}></UserPhoto>
+                <UserPhoto userInfo={user} size={size}></UserPhoto>
                 <a href={userURL}>{user.name}</a>
             </div>,
             userAnchor as HTMLElement,

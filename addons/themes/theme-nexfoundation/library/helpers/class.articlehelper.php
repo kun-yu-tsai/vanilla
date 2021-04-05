@@ -12,11 +12,11 @@ class ArticleHelper implements TemplateHelper {
         $userFragment = [
             "userID" => $user->UserID ?? $user["UserID"],
             "name" => $user->Name ?? $user["Name"],
-            "photoUrl"=> $user->Photo ?? $user["Photo"],
+            "photoUrl"=> is_object($user) ? $user->Photo ?? userPhotoUrl($user) : $user["Photo"],
         ];
         $userUrl = userUrl($user, "");
         $userUrl = htmlspecialchars(url($userUrl));
-        echo "<span class='MItem LastCommentBy' data-user='".json_encode($userFragment)."' data-url='".$userUrl."'></span>";
+        echo "<span class='MItem Author' data-user='".json_encode($userFragment)."' data-url='".$userUrl."'></span>";
     }
 
     function writeBookmarkAnchor($discussion) {

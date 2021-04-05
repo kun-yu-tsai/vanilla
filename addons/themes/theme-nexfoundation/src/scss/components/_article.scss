@@ -64,6 +64,57 @@
     padding: 15px 45px 15px 45px;
 }
 
+// Discussion Bottom Header style
+.MessageList.Discussion {
+
+    .Item-Header.DiscussionHeader {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    span.MItem.MCount.CommentCount {
+        display: flex;
+        align-items: center;
+        span {
+            margin-left: 5px;
+        }
+    }
+
+    span.MItem.ViewCount .BookmarkIconBox {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .BookmarkIcon {
+            fill: #FF3559;
+            stroke: #FF3559;
+            width: 14px;
+            height: 20px;
+        }
+        span {
+            margin-left: 5px;
+        }
+    }
+    span.MItem.Author {
+        margin-right: 0px;
+        margin-left: auto;
+        div.UserAnchor {
+            display: flex;
+            align-items: center;
+        }
+        div.UserAnchor a {
+            margin-left: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+
+    .DiscussionMeta {
+        display: none;
+    }
+}
+
 .Comment .Item-BodyWrap .Item-Header.CommentHeader {
     padding: 0px;
     padding-top: 0px;
