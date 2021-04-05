@@ -12,7 +12,7 @@ class ArticleHelper implements TemplateHelper {
         $userFragment = [
             "userID" => $user->UserID ?? $user["UserID"],
             "name" => $user->Name ?? $user["Name"],
-            "photoUrl"=> is_object($user) ? $user->Photo ?? userPhotoUrl($user) : $user["Photo"],
+            "photoUrl"=> is_object($user) ? userPhotoUrl($user) : $user["Photo"],
         ];
         $userUrl = userUrl($user, "");
         $userUrl = htmlspecialchars(url($userUrl));
