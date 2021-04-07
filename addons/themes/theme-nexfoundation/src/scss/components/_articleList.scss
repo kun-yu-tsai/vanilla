@@ -66,4 +66,12 @@ div.Meta.Meta-Discussion {
             margin-left: 5px;
         }
     }
+    div.break {
+        width: 100%;
+        height: 5px;
+        display: block;
+        @include md {
+            display: none;
+        }
+    }
 }

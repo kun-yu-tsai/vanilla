@@ -122,6 +122,7 @@ if (!function_exists('WriteDiscussion')) :
                         }
 
                     } else {
+                        ?><div class="break"></div><?php
                         Gdn::getContainer()->get(ArticleHelper::class)->writeUserAnchor($first);
                         echo '<span class="MItem LastCommentDate">'.
                             $dateTimeFormatter->formatDate($discussion->FirstDate, true, "%H:%M %Y/%m/%d").
