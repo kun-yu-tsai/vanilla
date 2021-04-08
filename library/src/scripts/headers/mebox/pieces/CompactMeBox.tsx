@@ -116,11 +116,6 @@ export default class CompactMeBox extends React.Component<IProps, IState> {
                                     <NotificationsContents panelBodyClass={panelBodyClass} userSlug={userInfo.name} />
                                 ),
                             },
-                            {
-                                buttonContent: <MessagesCount open={false} compact={true} />,
-                                openButtonContent: <MessagesCount open={true} compact={true} />,
-                                panelContent: <MessagesContents className={panelBodyClass} />,
-                            },
                         ]}
                     />
                 </Modal>
