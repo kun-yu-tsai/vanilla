@@ -52,6 +52,20 @@
     text-decoration:none !important;
 }
 
+div.Frame-row {
+    padding: 0px;
+    @include md {
+        padding: 8px;
+    }
+}
+
+section.Content.MainContent {
+    padding: 0px;
+    @include md {
+        padding: 8px;
+    }
+}
+
 .DiscussionHeader .AuthorWrap{
     @include lg {
       margin-left: 450px;
@@ -61,7 +75,10 @@
 .MessageList.Discussion {
     background: white;
     border-radius: 15px;
-    padding: 15px 45px 15px 45px;
+    padding: 15px;
+    @include md {
+        padding: 15px 45px 15px 45px;
+    }
 }
 
 // Discussion Bottom Header style
@@ -112,6 +129,13 @@
 
     .DiscussionMeta {
         display: none;
+    }
+}
+
+.MessageList.DataList.Comments {
+    display: inline;
+    @include md {
+        display: block;
     }
 }
 
