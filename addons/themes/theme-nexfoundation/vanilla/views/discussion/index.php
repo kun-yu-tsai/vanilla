@@ -27,7 +27,7 @@ $tagsHelper = Gdn::getContainer()->get(TagsHelper::class);
 $tagsHelper->writeMetaTags();
 
 //發表時間新位置
-echo ' <div class="articleTime">';
+echo ' <div class="articleTime Desktop">';
 echo anchor(Gdn_Format::toDate($Discussion->DateInserted, 'html'), $Discussion->Url, 'Permalink', ['rel' => 'nofollow']);
 echo '</div>';
 echo '</div>';
