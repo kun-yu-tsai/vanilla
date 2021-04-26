@@ -54,9 +54,7 @@ export class Bookmark extends React.Component<IBookmarkProps, IBookmarkState> {
                 ) : (
                     <BookmarkIcon className="BookmarkIcon" loading={this.state.loading} />
                 )}
-                <span>
-                    {this.state.countBookmark} {t("bookmarked")}
-                </span>
+                <span>{this.state.countBookmark}</span>
             </div>
         );
     }

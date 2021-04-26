@@ -84,6 +84,18 @@ section.Content.MainContent {
 // Discussion Bottom Header style
 .MessageList.Discussion {
 
+    .DiscussionHeader .Reactions {
+        width: auto;
+        height: auto;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 1px;
+        .Quote{
+            display: none;
+        }
+    }
+
     .Item-Header.DiscussionHeader {
         display: flex;
         align-items: center;
@@ -93,8 +105,18 @@ section.Content.MainContent {
     span.MItem.MCount.CommentCount {
         display: flex;
         align-items: center;
+        margin-left: 0px;
         span {
-            margin-left: 5px;
+            margin-left: 4px;
+        }
+    }
+
+    .LineBreak {
+        width: 100%;
+        height: 5px;
+        @include md {
+            width: 0px;
+            height: 0px;
         }
     }
 
@@ -113,8 +135,10 @@ section.Content.MainContent {
         }
     }
     span.MItem.Author {
-        margin-right: 0px;
-        margin-left: auto;
+        @include md {
+            margin-right: 0px;
+            margin-left: auto;
+        }
         div.UserAnchor {
             display: flex;
             align-items: center;
@@ -201,4 +225,17 @@ section.Content.MainContent {
             }
         }
     }
+}
+
+.ReactFacebook {
+    height: auto;
+    display: flex;
+}
+
+.ReactFacebook::before {
+    align-self: center;
+    content: '';
+    background: url('/addons/themes/theme-nexfoundation/assets/facebook.svg');
+    width: 22px;
+    height: 22px;
 }
