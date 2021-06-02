@@ -1639,9 +1639,9 @@ EOT;
             $this->setData('Connections', []);
             $this->EventArguments['User'] = $this->User;
             $this->fireEvent('GetConnections');
-            if (count($this->data('Connections')) > 0) {
-                $module->addLink('Options', sprite('SpConnection').' '.t('Social'), '/profile/connections', 'Garden.SignIn.Allow', ['class' => 'link-social']);
-            }
+            // if (count($this->data('Connections')) > 0) {
+            //     $module->addLink('Options', sprite('SpConnection').' '.t('Social'), '/profile/connections', 'Garden.SignIn.Allow', ['class' => 'link-social']);
+            // }
         }
 
         $module->addLink('Options', t('Access Tokens'), '/profile/tokens', 'Garden.Tokens.Add', ['class' => 'link-tokens']);
