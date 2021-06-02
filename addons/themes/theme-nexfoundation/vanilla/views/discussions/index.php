@@ -1,6 +1,7 @@
 <?php if (!defined('APPLICATION')) exit();
 $Session = Gdn::session();
 $isDataDrivenTheme = Gdn::themeFeatures()->useDataDrivenTheme();
+include $this->fetchViewLocation('override_functions', 'discussions');
 include_once $this->fetchViewLocation('helper_functions', 'discussions', 'vanilla');
 include_once $this->fetchViewLocation('helper_functions', 'categories', 'vanilla');
 

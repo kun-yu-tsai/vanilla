@@ -878,6 +878,7 @@ class ProfileController extends Gdn_Controller {
                 $newAvatar = $this->saveAvatars($tmpAvatar, $thumbOptions, $upload);
             } else if ($avatar && $crop && $crop->isCropped()) {
                 // New thumbnail
+                $upload->Exception = null;
                 $tmpAvatar = $source;
                 $thumbOptions = ['Crop' => true,
                     'SourceX' => $crop->getCropXValue(),

@@ -1,4 +1,10 @@
 .like-button {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    margin-left: 3px;
+    fill: #ff3559;
+    margin: 4px;
+    .like-count {
+        margin-left: 4px;
+    }
 }

@@ -1,7 +1,10 @@
+@import "../mixins/mixins";
+
 //title
 .DataList .Item .Title a {
     color: black !important;
-    font-size: 30px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .tagBlock{
@@ -22,4 +25,53 @@ li.ItemDiscussion {
     padding-left: 25px !important;
     padding-right: 25px !important;
     margin-bottom: 25px !important;
+}
+
+div.Meta.Meta-Discussion {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    div.UserAnchor {
+        display: flex;
+        align-items: center;
+        a {
+            margin-left: 5px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+    .MItem.Author {
+        @include md {
+            margin-left: auto;
+            margin-right: 0px;
+        }
+    }
+    span.MItem.ViewCount,
+    span.MItem.CommentCount {
+        display: flex;
+        align-items: center;
+
+    }
+    span.MItem.ViewCount .BookmarkIconBox {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .BookmarkIcon {
+            fill: #FF3559;
+            stroke: #FF3559;
+            width: 14px;
+            height: 20px;
+        }
+        span {
+            margin-left: 5px;
+        }
+    }
+    div.break {
+        width: 100%;
+        height: 5px;
+        display: block;
+        @include md {
+            display: none;
+        }
+    }
 }

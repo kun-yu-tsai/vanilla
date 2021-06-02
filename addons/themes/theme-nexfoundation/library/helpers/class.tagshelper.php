@@ -1,6 +1,6 @@
 <?php
 
-class TagsHelper {
+class TagsHelper implements TemplateHelper{
 
     public function writeMetaTags() {
         $module = Gdn::getContainer()->get(TagModule::class);

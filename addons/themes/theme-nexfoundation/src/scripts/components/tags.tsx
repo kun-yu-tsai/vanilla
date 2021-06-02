@@ -18,9 +18,7 @@ export function TagsModule(props) {
                     {tags.map((tag, index) => {
                         return (
                             <li key={`tag-${index}`}>
-                                <a href={`/discussions/tagged/${tag}`}>
-                                    {tag} <span className="Count">1</span>
-                                </a>
+                                <a href={`/discussions/tagged/${tag}`}>{tag}</a>
                             </li>
                         );
                     })}

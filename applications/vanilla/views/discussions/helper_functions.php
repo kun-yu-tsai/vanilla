@@ -220,7 +220,7 @@ if (!function_exists('WriteDiscussion')) :
    </span>
 
             <div class="ItemContent Discussion">
-                <div class="tag"  aria-level="3" id="tag_<?php echo $discussion->DiscussionID; ?>">
+                <div class="tag" id="tag_<?php echo $discussion->DiscussionID; ?>">
                 </div>
                 <div class="Title" role="heading" aria-level="3">
                     <?php
