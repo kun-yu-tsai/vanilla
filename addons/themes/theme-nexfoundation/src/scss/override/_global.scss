@@ -2,3 +2,11 @@ div.Frame {
   background: #f8f8f8;
   font-family: 'Noto Sans TC', sans-serif;
 }
+
+// In small device, hide "new discussion, tag clouds" in discussion detail view.
+.Panel-main{
+  display: none;
+  @include lg{
+    display: block;
+  }
+}
