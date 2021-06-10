@@ -125,16 +125,16 @@ if (!function_exists('ExcerptBody')):
      * @return string Excerpt body.
      */
     function excerptBody($discussion) {
+
         $dom = new DOMDocument();
         $html = Gdn_Format::to($discussion->Body, $discussion->Format);
         $dom->loadHTML($html);
         $body = $dom->getElementsByTagName('body');
         if ($body->length <= 0) {
-            return $html;
+            return "";
         }
         $body = $body->item(0);
-        $node = $body->firstChild;
-        return utf8_decode($dom->saveHTML($node));
+        return utf8_decode($body->textContent);
     }
 endif;
 
@@ -151,11 +151,8 @@ if (!function_exists('WriteDiscussionExcerpt')):
             <div class="excerpt">
             <?php
                 echo excerptBody($discussion);
-            ?>
-            </div>
-            <div class="read-more" data-url="<?php echo $discussionUrl?>">
-            <?php
-                echo adminCheck($discussion, ['', ' ']).anchor('...', $discussionUrl)
+                // TODO: bind discussion url to this excerpt.
+                // echo adminCheck($discussion, ['', ' ']).anchor(excerptBody($discussion), $discussionUrl);
             ?>
             </div>
         </div>
@@ -174,12 +171,15 @@ if (!function_exists('WriteDiscussion')) :
     function writeDiscussion($discussion, $sender, $session) {
         $cssClass = cssClass($discussion);
         $discussionUrl = $discussion->Url;
+
+        $discussionUrl = substr($discussionUrl, 0, strrpos($discussionUrl, "/"));
+
         $category = CategoryModel::categories($discussion->CategoryID);
         /** @var Vanilla\Formatting\DateTimeFormatter */
         $dateTimeFormatter = Gdn::getContainer()->get(\Vanilla\Formatting\DateTimeFormatter::class);
 
 
-        if ($session->UserID) {
+        if ($session->UserID && $sender->data('ShowLastComment', true)) {
             $discussionUrl .= '#latest';
         }
         $sender->EventArguments['DiscussionUrl'] = &$discussionUrl;
@@ -220,6 +220,9 @@ if (!function_exists('WriteDiscussion')) :
    </span>
 
             <div class="ItemContent Discussion">
+                <h1>Good</h>
+                <div class="tag"  aria-level="3" id="tag_<?php echo $discussion->DiscussionID; ?>">
+                </div>
                 <div class="Title" role="heading" aria-level="3">
                     <?php
                     echo adminCheck($discussion, ['', ' ']).anchor($discussionName, $discussionUrl);
@@ -232,6 +235,22 @@ if (!function_exists('WriteDiscussion')) :
                 <div class="Meta Meta-Discussion">
                     <?php
                     writeTags($discussion);
+
+                    if ($sender->data('_ShowCategoryLink', true) && $category && c('Vanilla.Categories.Use') &&
+                        CategoryModel::checkPermission($category, 'Vanilla.Discussions.View')) {
+                        // Kun: Skip accessibleAttribute because we now allow access for all cateogories.
+                        // $accessibleAttributes = ["tabindex" => "0", "aria-label" => HtmlUtils::accessibleLabel($template, $accessibleVars)];
+                        // if ($layout === "mixed") { // The links to categories are duplicates and have no accessible value
+                        //     $accessibleAttributes['tabindex'] = "-1";
+                        //     $accessibleAttributes['aria-hidden'] = "true";
+                        // }
+                        echo wrap(
+                            anchor(htmlspecialchars($discussion->Category),
+                        categoryUrl($discussion->CategoryUrlCode)/*, $accessibleAttributes */),
+                            'span',
+                            ['class' => 'MItem Category '.$category['CssClass']]
+                        );
+                    }
                     ?>
                     <span class="MItem MCount ViewCount">
                     <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -268,7 +287,7 @@ if (!function_exists('WriteDiscussion')) :
 
                     $discussionName = is_array($discussion) ? $discussion['Name'] : $discussion->Name;
 
-                    if ($discussion->LastCommentID != '') {
+                    if ($discussion->LastCommentID != '' && $sender->data('ShowLastComment', true)) {
                         echo ' <span class="MItem LastCommentBy">'.sprintf(t('Most recent by %1$s'), userAnchor($last)).'</span> ';
                         echo ' <span class="MItem LastCommentDate">'.Gdn_Format::date($discussion->LastDate, "html").'</span>';
                         $userName = $last->Name;
@@ -291,21 +310,6 @@ if (!function_exists('WriteDiscussion')) :
                         $template = t('User "%s" started discussion "%s" on date %s');
                         $userName = $first->Name;
                         $accessibleVars = [$userName, $discussionName, $dateTimeFormatter->formatDate($discussion->FirstDate, false)];
-                    }
-
-                    if ($sender->data('_ShowCategoryLink', true) && $category && c('Vanilla.Categories.Use') &&
-                        CategoryModel::checkPermission($category, 'Vanilla.Discussions.View')) {
-                        $accessibleAttributes = ["tabindex" => "0", "aria-label" => HtmlUtils::accessibleLabel($template, $accessibleVars)];
-                        if ($layout === "mixed") { // The links to categories are duplicates and have no accessible value
-                            $accessibleAttributes['tabindex'] = "-1";
-                            $accessibleAttributes['aria-hidden'] = "true";
-                        }
-                        echo wrap(
-                            anchor(htmlspecialchars($discussion->Category),
-                                categoryUrl($discussion->CategoryUrlCode), $accessibleAttributes),
-                            'span',
-                            ['class' => 'MItem Category '.$category['CssClass']]
-                        );
                     }
                     $sender->fireEvent('DiscussionMeta');
                     ?>

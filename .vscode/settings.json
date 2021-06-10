@@ -10,10 +10,10 @@
         "cloud/themes": true,
         ".idea": true,
         "cgi-bin": true,
-        "dist": true,
-        "**/node_modules": true,
+        "dist": false,
+        "**/node_modules": false,
         "**/bower_components": true,
-        "vendor": true,
+        "vendor": false,
         "**/.phpunit.result.cache": true,
         ".htaccess.dist": true
     },

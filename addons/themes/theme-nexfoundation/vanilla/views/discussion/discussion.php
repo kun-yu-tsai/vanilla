@@ -15,6 +15,7 @@ $Discussion = $this->data('Discussion');
 //all data
 // print_r($Discussion);
 
+error_log("2");
 
 $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
 

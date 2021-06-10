@@ -66,6 +66,7 @@ if (!function_exists('WriteDiscussion')) :
                 <?php
                 writeDiscussionExcerpt($discussion);
                 ?>
+                <br> <!-- TODO: replace this padding by utilising CSS -->
                 <div class="Meta Meta-Discussion">
                     <?php
                     writeTags($discussion);
@@ -125,7 +126,7 @@ if (!function_exists('WriteDiscussion')) :
                         ?><div class="break"></div><?php
                         Gdn::getContainer()->get(ArticleHelper::class)->writeUserAnchor($first);
                         echo '<span class="MItem LastCommentDate">'.
-                            $dateTimeFormatter->formatDate($discussion->FirstDate, true, "%H:%M %Y/%m/%d").
+                            $dateTimeFormatter->formatDate($discussion->FirstDate, true, " %Y/%m/%d").
                             "</span>"
                         ;
                         $template = t('User "%s" started discussion "%s" on date %s');
