@@ -55,7 +55,6 @@ if (!function_exists('WriteDiscussion')) :
             </span>
 
             <div class="ItemContent Discussion">
-                <h3>Hello</h3>
                 <div class="tag" id="tag_<?php echo $discussion->DiscussionID; ?>">
                 </div>
                 <div class="Title" role="heading" aria-level="3">
@@ -67,6 +66,7 @@ if (!function_exists('WriteDiscussion')) :
                 <?php
                 writeDiscussionExcerpt($discussion);
                 ?>
+                <br> <!-- TODO: replace this padding by utilising CSS -->
                 <div class="Meta Meta-Discussion">
                     <?php
                     writeTags($discussion);

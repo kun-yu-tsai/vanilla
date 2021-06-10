@@ -125,16 +125,16 @@ if (!function_exists('ExcerptBody')):
      * @return string Excerpt body.
      */
     function excerptBody($discussion) {
+
         $dom = new DOMDocument();
         $html = Gdn_Format::to($discussion->Body, $discussion->Format);
         $dom->loadHTML($html);
         $body = $dom->getElementsByTagName('body');
         if ($body->length <= 0) {
-            return $html;
+            return "";
         }
         $body = $body->item(0);
-        $node = $body->firstChild;
-        return utf8_decode($dom->saveHTML($node));
+        return utf8_decode($body->textContent);
     }
 endif;
 
@@ -151,11 +151,8 @@ if (!function_exists('WriteDiscussionExcerpt')):
             <div class="excerpt">
             <?php
                 echo excerptBody($discussion);
-            ?>
-            </div>
-            <div class="read-more" data-url="<?php echo $discussionUrl?>">
-            <?php
-                echo adminCheck($discussion, ['', ' ']).anchor('...', $discussionUrl)
+                // TODO: bind discussion url to this excerpt.
+                // echo adminCheck($discussion, ['', ' ']).anchor(excerptBody($discussion), $discussionUrl);
             ?>
             </div>
         </div>

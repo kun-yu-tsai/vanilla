@@ -3,6 +3,14 @@ div.Frame {
   font-family: 'Noto Sans TC', sans-serif;
 }
 
+div.excerpt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
 // In small device, hide "new discussion, tag clouds" in discussion detail view.
 .Panel-main{
   display: none;
