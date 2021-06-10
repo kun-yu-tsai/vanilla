@@ -223,6 +223,7 @@ if (!function_exists('WriteDiscussion')) :
    </span>
 
             <div class="ItemContent Discussion">
+                <h1>Good</h>
                 <div class="tag"  aria-level="3" id="tag_<?php echo $discussion->DiscussionID; ?>">
                 </div>
                 <div class="Title" role="heading" aria-level="3">

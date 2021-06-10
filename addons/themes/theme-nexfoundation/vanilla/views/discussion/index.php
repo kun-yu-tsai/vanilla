@@ -9,7 +9,7 @@ if (!defined('APPLICATION')) {
 
 $Discussion = $this->data('Discussion');
 $Author = Gdn::userModel()->getID($Discussion->InsertUserID); // userBuilder($Discussion, 'Insert');
-
+error_log("1");
 
 // Wrap the discussion related content in a div.
 $this->fireEvent('AfterPageTitle');
