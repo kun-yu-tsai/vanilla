@@ -70,7 +70,7 @@ ul.TagCloud li.TagCloud-Item {
 }
 
 .Box.Tags {
-    display: none;
+    display: block;
     @include lg {
         display: block;
     }
