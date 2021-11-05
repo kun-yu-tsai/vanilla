@@ -33,7 +33,7 @@ export class BaseAdvertisement extends React.Component<IProps> {
                 <img
                     style={this.style}
                     className="banner"
-                    src={`${this.props.currentThemePath}/assets/ad.svg`}
+                    src={`${this.props.currentThemePath}/assets/ad.png`}
                     alt="nex foundation"
                     onClick={() => this.open()}
                 />
