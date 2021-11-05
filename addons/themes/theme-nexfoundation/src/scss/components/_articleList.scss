@@ -50,25 +50,30 @@ div.Meta.Meta-Discussion {
     span.MItem.CommentCount {
         display: flex;
         align-items: center;
-
+        cursor: pointer;
+        span {
+            margin-left: 10px;
+        }
     }
     span.MItem.ViewCount .BookmarkIconBox {
         display: flex;
         align-items: center;
         cursor: pointer;
+        margin-left: 8px;
+        margin-right: 10px;
         .BookmarkIcon {
             fill: #FF3559;
             stroke: #FF3559;
-            width: 14px;
+            width: 15px;
             height: 20px;
         }
         span {
-            margin-left: 5px;
+            margin-left: 10px;
         }
     }
     div.break {
         width: 100%;
-        height: 5px;
+        height: 15px;
         display: block;
         @include md {
             display: none;

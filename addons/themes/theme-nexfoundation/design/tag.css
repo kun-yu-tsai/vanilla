@@ -4,11 +4,11 @@
 }
 
 .InlineTags li:after {
-    content: ', ';
+    content: ", ";
 }
 
 .InlineTags li:last-child:after {
-    content: '';
+    content: "";
 }
 
 .MessageList .Meta.InlineTags {
@@ -31,16 +31,17 @@
 }
 
 .TagCloud li:before {
-    content: '#';
+    content: "#";
     color: red;
 }
 
 .TagCloud li:after {
-    content: '|';
+    content: "|";
 }
 
 .TagCloud .TagCloud-Item {
-    margin: 5px !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
 }
 
 .AvailableTag {
