@@ -24,7 +24,7 @@ class PopularTagsModule extends Gdn_Module {
         ob_start();
         ?>
         <div class="Box Tags">
-            <?php echo panelHeading(t('Popular Tags')); ?>
+            <?php echo '<div class="hot-forum">'.t('Popular Tags').'</div>'; ?>
             <ul class="TagCloud">
                 <?php foreach ($this->getTags() as $tag) :?>
                     <?php if ($tag['Name'] != '') :?>

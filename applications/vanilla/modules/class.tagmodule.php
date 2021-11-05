@@ -241,7 +241,8 @@ endforeach; ?>
         ob_start();
         ?>
         <div class="Box Tags">
-            <?php echo panelHeading(t($this->ParentID > 0 ? 'Tagged' : 'Popular Tags')); ?>
+            <?php echo '<div class="hot-forum">'.t('Popular Tags').'</div>'; ?>
+            <!-- <?php echo panelHeading(t($this->ParentID > 0 ? 'Tagged' : 'Popular Tags')); ?> -->
             <ul class="TagCloud">
                 <?php foreach ($this->_TagData->result() as $tag) :
 ?>
